@@ -45,8 +45,9 @@ export class UserStore {
       if (currentUsers.rows.length) {
         throw new Error(`User ${u.username} already exists.`);
       }
-    } catch (error) {
-      throw new Error(`Could not verify if user ${u.username} already exists.`);
+    } catch (err) {
+      // console.log(err);
+      throw err;
     }
     try {
       const sql =
