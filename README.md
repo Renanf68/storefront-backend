@@ -7,7 +7,7 @@ This repo contains a basic Storefront API. To get started, clone this repo and r
 ## Setup
 
 ### 1. Create a .env file
-You need to setup the required enviromental variables:
+You need to setup the required environmental variables:
 ```bash
 POSTGRES_HOST=
 POSTGRES_DB=
@@ -30,7 +30,7 @@ With the container running, you need to access it with the POSTGRES_USER and cre
 ```bash
 docker exec -it <container_name> bash
 su postgres
-psql postgres
+psql
 CREATE DATABASE <database_name>;
 ```
 
