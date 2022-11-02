@@ -2,16 +2,45 @@
 
 ## Getting Started
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+This repo contains a basic Storefront API. To get started, clone this repo and run `yarn` in your terminal at the project root.
 
-## Required Technologies
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
+## Setup
+
+### 1. Create a .env file
+You need to setup the required enviromental variables:
+```bash
+POSTGRES_HOST=
+POSTGRES_DB=
+POSTGRES_TEST_DB=
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+ENV=dev
+BCRYPT_PASSWORD=
+SALT_ROUNDS=
+PEPPER=
+TOKEN_SECRET=
+```
+
+### 2. Create a docker container
+The next step is to run `yarn docker` to create the container and the main database POSTGRES_DB.
+
+**NOTE** It is required a docker interface, like Docker Desktop, installed and running.
+### 3. Create the test database
+With the container running, you need to access it with the POSTGRES_USER and create the POSTGRES_TEST_DB: 
+```bash
+docker exec -it <container_name> bash
+su postgres
+psql postgres
+CREATE DATABASE <database_name>;
+```
+
+
+
+
+
+
+
+
 
 ## Steps to Completion
 
