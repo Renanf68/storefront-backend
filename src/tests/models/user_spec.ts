@@ -1,15 +1,11 @@
-import { User, UserStore } from "../../models/user";
+import { UserStore } from "../../models/user";
+import { testUser } from "../helpers";
 
 const store = new UserStore();
 
-const testUser = {
-  username: "fanning",
-  first_name: "Mick",
-  last_name: "Fanning",
-  password: "AsasdG30f",
-} as User;
+let newUserId: string;
 
-fdescribe("User Model", () => {
+describe("User Model", () => {
   it("should have an index method", () => {
     expect(store.index).toBeDefined();
   });
@@ -25,6 +21,7 @@ fdescribe("User Model", () => {
   });
   it("create method should return created user", async () => {
     const result = await store.create(testUser);
+    newUserId = result.id ?? "not_found";
     expect(result.username).toEqual("fanning");
   });
   it("create method should return error when user already exists", async () => {
@@ -40,7 +37,7 @@ fdescribe("User Model", () => {
     expect(user?.username).toEqual(testUser.username);
   });
   it("delete method should return deleted user", async () => {
-    const user = await store.delete("1");
-    expect(user.id.toString()).toEqual("1");
+    const user = await store.delete(newUserId);
+    expect(user.id).toEqual(newUserId);
   });
 });

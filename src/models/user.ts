@@ -1,17 +1,9 @@
 import bcrypt from "bcrypt";
 import Client from "../database";
+import { User } from "../types";
 
 const saltRounds = process.env.SALT_ROUNDS ?? "0";
 const pepper = process.env.PEPPER ?? "";
-
-export interface User {
-  id?: string;
-  username: string;
-  first_name?: string;
-  last_name?: string;
-  password?: string;
-  password_digest?: string;
-}
 
 export class UserStore {
   async index(): Promise<User[]> {
@@ -46,7 +38,6 @@ export class UserStore {
         throw new Error(`User ${u.username} already exists.`);
       }
     } catch (err) {
-      // console.log(err);
       throw err;
     }
     try {

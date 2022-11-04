@@ -1,17 +1,11 @@
 import jwt from "jsonwebtoken";
 import supertest from "supertest";
-import { User } from "../../models/user";
 import app from "../../server";
+import { testUser } from "../helpers";
 
 const request = supertest(app);
 
-const testUser = {
-  username: "fanning",
-  first_name: "Mick",
-  last_name: "Fanning",
-  password: "AcgsdG30f",
-} as User;
-
+let newUserId: string;
 let userToken: string;
 
 describe("User Handler", () => {
@@ -51,12 +45,13 @@ describe("User Handler", () => {
     const response = await request
       .get("/users/1")
       .set("authorization", userToken);
+    newUserId = response.body.id;
     expect(response.body.username).toEqual(testUser.username);
   });
   it("delete /users/:id endpoint should return deleted user id", async () => {
     const response = await request
-      .delete("/users/1")
+      .delete(`/users/${newUserId}`)
       .set("authorization", userToken);
-    expect(response.body.id).toEqual(1);
+    expect(response.body.id).toEqual(newUserId);
   });
 });

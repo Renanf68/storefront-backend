@@ -19,7 +19,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", function (req: Request, res: Response) {
+app.get("/", function (_req: Request, res: Response) {
   res.send("Hello World!");
 });
 
