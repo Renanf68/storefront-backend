@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import supertest from "supertest";
 import { User } from "../../models/user";
 import app from "../../server";
@@ -8,12 +9,12 @@ const testUser = {
   username: "fanning",
   first_name: "Mick",
   last_name: "Fanning",
-  password: "AsasdG30f",
+  password: "AcgsdG30f",
 } as User;
 
 let userToken: string;
 
-fdescribe("User Handler", () => {
+describe("User Handler", () => {
   it("post /users/create endpoint should return status 200", async () => {
     const response = await request
       .post("/users/create")
@@ -22,14 +23,19 @@ fdescribe("User Handler", () => {
       .set("Accept", "application/json");
     expect(response.status).toBe(200);
   });
-  it("post /users/auth endpoint should return a token", async () => {
+  it("post /users/auth endpoint should return correct token", async () => {
     const response = await request
       .post("/users/auth")
       .send({ username: testUser.username, password: testUser.password })
       .set("Content-Type", "application/json")
       .set("Accept", "application/json");
     userToken = `Bearer ${response.text.replace(/['"]+/g, "")}`;
-    expect(response.text).toMatch("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
+    const decoded = jwt.decode(response.text.replace(/['"]+/g, ""));
+    const username = decoded
+      ? (decoded as jwt.JwtPayload).user?.username
+      : null;
+    console.log(username);
+    expect(username).toEqual(testUser.username);
   });
   it("get /users endpoint without token should return 401", async () => {
     const response = await request.get("/users");

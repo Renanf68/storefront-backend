@@ -9,7 +9,7 @@ const testUser = {
   password: "AsasdG30f",
 } as User;
 
-describe("User Model", () => {
+fdescribe("User Model", () => {
   it("should have an index method", () => {
     expect(store.index).toBeDefined();
   });
