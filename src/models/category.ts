@@ -51,9 +51,9 @@ export class CategoryStore {
   }
   async update(c: Category): Promise<Category> {
     try {
-      const sql = "UPDATE categories SET name=($1) WHERE id=($2) RETURNING *";
+      const sql = "UPDATE categories SET name=($2) WHERE id=($1) RETURNING *";
       const conn = await Client.connect();
-      const result = await conn.query(sql, [c.name, c.id]);
+      const result = await conn.query(sql, [c.id, c.name]);
       const category = result.rows[0];
       conn.release();
       return category;
@@ -63,7 +63,7 @@ export class CategoryStore {
   }
   async delete(id: string): Promise<{ id: string }> {
     try {
-      const sql = "DELETE FROM categories WHERE id=($1) RETURNING id";
+      const sql = "DELETE FROM categories WHERE id=($1) RETURNING *";
       const conn = await Client.connect();
       const result = await conn.query(sql, [id]);
       conn.release();

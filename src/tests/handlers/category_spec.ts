@@ -9,7 +9,7 @@ let newCategoryId: string;
 let newUserId: string;
 let userToken: string;
 
-fdescribe("Category Handlers", () => {
+describe("Category Handlers", () => {
   beforeAll(async () => {
     const response = await request
       .post("/users")

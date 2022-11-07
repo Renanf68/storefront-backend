@@ -24,6 +24,10 @@ describe("User Models", () => {
     newUserId = result.id ?? "not_found";
     expect(result.username).toEqual("fanning");
   });
+  it("show method should return correct user", async () => {
+    const result = await store.show(newUserId);
+    expect(result.id).toEqual(newUserId);
+  });
   it("create method should return error when user already exists", async () => {
     await expectAsync(store.create(testUser)).toBeRejectedWithError(
       "User fanning already exists."
