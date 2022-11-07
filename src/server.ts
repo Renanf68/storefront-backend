@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import userRoutes from "./handlers/user";
+import categoryRoutes from "./handlers/category";
 // import orderRoutes from "./handlers/order";
 // import productRoutes from "./handlers/product";
 // import dashboardRoutes from "./handlers/dashboard";
@@ -24,6 +25,7 @@ app.get("/", function (_req: Request, res: Response) {
 });
 
 userRoutes(app);
+categoryRoutes(app);
 // productRoutes(app);
 // orderRoutes(app);
 // dashboardRoutes(app);

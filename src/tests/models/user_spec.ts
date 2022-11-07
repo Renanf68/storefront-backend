@@ -5,7 +5,7 @@ const store = new UserStore();
 
 let newUserId: string;
 
-describe("User Model", () => {
+describe("User Models", () => {
   it("should have an index method", () => {
     expect(store.index).toBeDefined();
   });

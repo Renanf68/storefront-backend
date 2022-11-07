@@ -5,7 +5,7 @@ const store = new CategoryStore();
 
 let newCategoryId: string;
 
-fdescribe("Category Model", () => {
+describe("Category Models", () => {
   it("should have an index method", () => {
     expect(store.index).toBeDefined();
   });

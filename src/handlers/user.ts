@@ -30,7 +30,7 @@ const create = async (req: Request, res: Response) => {
       { user: { id: newUser.id, username: newUser.username } },
       process.env.TOKEN_SECRET!
     );
-    res.json(token);
+    res.json({ id: newUser.id, token });
   } catch (err) {
     res.status(400);
     res.json(err);

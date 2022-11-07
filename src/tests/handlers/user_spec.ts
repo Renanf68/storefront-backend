@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import supertest from "supertest";
 import app from "../../server";
-import { testUser } from "../helpers";
+import { getUserTokenFromResponse, testUser } from "../helpers";
 
 const request = supertest(app);
 
 let newUserId: string;
 let userToken: string;
 
-describe("User Handler", () => {
+describe("User Handlers", () => {
   it("post /users endpoint should return status 200", async () => {
     const response = await request
       .post("/users")
@@ -23,7 +23,7 @@ describe("User Handler", () => {
       .send({ username: testUser.username, password: testUser.password })
       .set("Content-Type", "application/json")
       .set("Accept", "application/json");
-    userToken = `Bearer ${response.text.replace(/['"]+/g, "")}`;
+    userToken = getUserTokenFromResponse(response.text);
     const decoded = jwt.decode(response.text.replace(/['"]+/g, ""));
     const username = decoded
       ? (decoded as jwt.JwtPayload).user?.username

@@ -10,3 +10,7 @@ export const testUser = {
 export const testCategory = {
   name: "surf",
 } as Category;
+
+export const getUserTokenFromResponse = (text: string) => {
+  return `Bearer ${text.replace(/['"]+/g, "")}`;
+};

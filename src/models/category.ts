@@ -34,7 +34,9 @@ export class CategoryStore {
         throw new Error(`Category ${c.name} already exists.`);
       }
     } catch (err) {
-      throw err;
+      throw new Error(
+        `Unable to check if category ${c.name} already exists: ${err}`
+      );
     }
     try {
       const sql = "INSERT INTO categories (name) VALUES($1) RETURNING *";
