@@ -9,9 +9,9 @@ let newUserId: string;
 let userToken: string;
 
 describe("User Handler", () => {
-  it("post /users/create endpoint should return status 200", async () => {
+  it("post /users endpoint should return status 200", async () => {
     const response = await request
-      .post("/users/create")
+      .post("/users")
       .send(testUser)
       .set("Content-Type", "application/json")
       .set("Accept", "application/json");
