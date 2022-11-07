@@ -1,4 +1,4 @@
-import { User } from "../types";
+import { Category, User } from "../types";
 
 export const testUser = {
   username: "fanning",
@@ -6,3 +6,7 @@ export const testUser = {
   last_name: "Fanning",
   password: "AsasdG30f",
 } as User;
+
+export const testCategory = {
+  name: "surf",
+} as Category;

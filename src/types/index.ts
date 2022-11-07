@@ -6,3 +6,8 @@ export interface User {
   password?: string;
   password_digest?: string;
 }
+
+export interface Category {
+  id?: string;
+  name: string;
+}
