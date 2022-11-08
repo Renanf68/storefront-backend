@@ -1,26 +1,28 @@
 import express, { Request, Response } from "express";
 import { verifyAuthToken } from "./verifyAuthToken";
-import { CategoryStore } from "../models/category";
+import { ProductStore } from "../models/product";
 
-const store = new CategoryStore();
+const store = new ProductStore();
 
 const index = async (_req: Request, res: Response) => {
-  const categories = await store.index();
-  res.json(categories);
+  const products = await store.index();
+  res.json(products);
 };
 const show = async (req: Request, res: Response) => {
-  const category = await store.show(req.params.id);
-  if (!category) {
-    res.send("Category not found");
+  const product = await store.show(req.params.id);
+  if (!product) {
+    res.send("Product not found");
   }
-  res.json(category);
+  res.json(product);
 };
 const create = async (req: Request, res: Response) => {
   try {
-    const newCategory = await store.create({
+    const newProduct = await store.create({
       name: req.body.name,
+      price: req.body.price,
+      category_id: req.body.category_id,
     });
-    res.json(newCategory);
+    res.json(newProduct);
   } catch (error) {
     res.status(400);
     res.json(error);
@@ -29,8 +31,10 @@ const create = async (req: Request, res: Response) => {
 const update = async (req: Request, res: Response) => {
   try {
     const updated = await store.update({
-      name: req.body.name,
       id: req.params.id,
+      name: req.body.name,
+      price: req.body.price,
+      category_id: req.body.category_id,
     });
     res.json(updated);
   } catch (error) {
@@ -48,12 +52,12 @@ const destroy = async (req: Request, res: Response) => {
   }
 };
 
-const categoryRoutes = (app: express.Application) => {
-  app.get("/categories", index);
-  app.get("/categories/:id", show);
-  app.post("/categories", verifyAuthToken, create);
-  app.put("/categories/:id", verifyAuthToken, update);
-  app.delete("/categories/:id", verifyAuthToken, destroy);
+const productRoutes = (app: express.Application) => {
+  app.get("/products", index);
+  app.get("/products/:id", show);
+  app.post("/products", verifyAuthToken, create);
+  app.put("/products/:id", verifyAuthToken, update);
+  app.delete("/products/:id", verifyAuthToken, destroy);
 };
 
-export default categoryRoutes;
+export default productRoutes;

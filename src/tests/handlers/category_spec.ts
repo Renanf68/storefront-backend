@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import supertest from "supertest";
 import app from "../../server";
 import { testUser, testCategory, getUserTokenFromResponse } from "../helpers";
@@ -20,14 +19,12 @@ describe("Category Handlers", () => {
     userToken = getUserTokenFromResponse(response.body.token);
   }),
     it("post /categories endpoint should return status 200", async () => {
-      console.log("userToken", userToken);
       const response = await request
         .post("/categories")
         .send(testCategory)
         .set("Content-Type", "application/json")
         .set("Accept", "application/json")
         .set("authorization", userToken);
-      console.log("response", response.error);
       newCategoryId = response.body.id;
       expect(response.status).toBe(200);
     });

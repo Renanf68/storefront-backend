@@ -3,8 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import userRoutes from "./handlers/user";
 import categoryRoutes from "./handlers/category";
+import productRoutes from "./handlers/product";
 // import orderRoutes from "./handlers/order";
-// import productRoutes from "./handlers/product";
 // import dashboardRoutes from "./handlers/dashboard";
 
 const app: express.Application = express();
@@ -26,7 +26,7 @@ app.get("/", function (_req: Request, res: Response) {
 
 userRoutes(app);
 categoryRoutes(app);
-// productRoutes(app);
+productRoutes(app);
 // orderRoutes(app);
 // dashboardRoutes(app);
 
