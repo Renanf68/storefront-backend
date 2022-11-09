@@ -6,15 +6,20 @@ export interface User {
   password?: string;
   password_digest?: string;
 }
-
 export interface Category {
   id?: string;
   name: string;
 }
-
 export interface Product {
   id?: string;
   name: string;
   price: number;
   category_id: string;
+}
+
+export type OrderStatus = "active" | "complete" | "canceled";
+export interface Order {
+  id?: string;
+  status: OrderStatus;
+  user_id: string;
 }
