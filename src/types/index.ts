@@ -23,3 +23,9 @@ export interface Order {
   status: OrderStatus;
   user_id: string;
 }
+export interface OrderProducts {
+  id?: string;
+  order_id: string;
+  product_id: string;
+  quantity: number;
+}

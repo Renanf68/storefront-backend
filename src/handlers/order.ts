@@ -43,7 +43,7 @@ const addProduct = async (req: Request, res: Response) => {
     const productId: string = req.body.productId;
     const quantity: number = parseInt(req.body.quantity);
 
-    const product = await store.addProduct(quantity, orderId, productId);
+    const product = await store.addProduct(orderId, productId, quantity);
     res.json(product);
   } catch (err) {
     const message = (err as Error).message;

@@ -1,5 +1,5 @@
 import Client from "../database";
-import { Order, OrderStatus } from "../types";
+import { Order, OrderProducts, OrderStatus } from "../types";
 
 export class OrderStore {
   async index(): Promise<Order[]> {
@@ -50,10 +50,10 @@ export class OrderStore {
     }
   }
   async addProduct(
-    quantity: number,
     orderId: string,
-    productId: string
-  ): Promise<Order> {
+    productId: string,
+    quantity: number
+  ): Promise<OrderProducts> {
     try {
       const orderSql = "SELECT * FROM orders WHERE id=($1)";
       const conn = await Client.connect();
@@ -78,8 +78,10 @@ export class OrderStore {
   }
   async delete(id: string): Promise<Order> {
     try {
-      const sql = "DELETE FROM orders WHERE id=($1)";
+      const relationshipSql = "DELETE FROM order_products WHERE order_id=($1)";
+      const sql = "DELETE FROM orders WHERE id=($1) RETURNING *";
       const conn = await Client.connect();
+      await conn.query(relationshipSql, [id]);
       const result = await conn.query(sql, [id]);
       const order = result.rows[0];
       conn.release();

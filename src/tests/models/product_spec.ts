@@ -2,7 +2,7 @@ import { CategoryStore } from "../../models/category";
 import { ProductStore } from "../../models/product";
 import { testCategory, testProduct } from "../helpers";
 
-const categorystore = new CategoryStore();
+const categoryStore = new CategoryStore();
 const store = new ProductStore();
 
 let newCategoryId: string;
@@ -10,7 +10,7 @@ let newProductId: string;
 
 describe("Product Models", () => {
   beforeAll(async () => {
-    const result = await categorystore.create(testCategory);
+    const result = await categoryStore.create(testCategory);
     newCategoryId = result.id!;
   });
   it("should have an index method", () => {
