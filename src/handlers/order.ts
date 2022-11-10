@@ -42,9 +42,8 @@ const addProduct = async (req: Request, res: Response) => {
     const orderId: string = req.params.id;
     const productId: string = req.body.productId;
     const quantity: number = parseInt(req.body.quantity);
-
-    const product = await store.addProduct(orderId, productId, quantity);
-    res.json(product);
+    const relationship = await store.addProduct(orderId, productId, quantity);
+    res.json(relationship);
   } catch (err) {
     const message = (err as Error).message;
     res.status(400);
@@ -63,7 +62,7 @@ const orderRoutes = (app: express.Application) => {
   app.put("/orders/:id", verifyAuthToken, updateStatus);
   app.delete("/orders/:id", verifyAuthToken, destroy);
   // add product
-  app.post("/orders/:id/products", addProduct);
+  app.post("/orders/:id/products", verifyAuthToken, addProduct);
 };
 
 export default orderRoutes;

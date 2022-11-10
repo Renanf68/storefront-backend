@@ -57,4 +57,7 @@ describe("Product Models", () => {
     const product = await store.delete(newProductId);
     expect(product.id).toEqual(newProductId);
   });
+  afterAll(async () => {
+    await categoryStore.delete(newCategoryId);
+  });
 });

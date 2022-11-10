@@ -15,7 +15,7 @@ let newCategoryId: string;
 let newProductId: string;
 let newOrderId: string;
 
-fdescribe("Order Models", () => {
+describe("Order Models", () => {
   beforeAll(async () => {
     const user = await userStore.create(testUser);
     newUserId = user.id!;
@@ -75,5 +75,10 @@ fdescribe("Order Models", () => {
   it("delete method should return deleted order", async () => {
     const order = await store.delete(newOrderId);
     expect(order.id).toEqual(newOrderId);
+  });
+  afterAll(async () => {
+    await userStore.delete(newUserId);
+    await productStore.delete(newProductId);
+    await categoryStore.delete(newCategoryId);
   });
 });
