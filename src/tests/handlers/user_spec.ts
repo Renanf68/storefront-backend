@@ -15,7 +15,6 @@ describe("User Handlers", () => {
       .send(testUser)
       .set("Content-Type", "application/json")
       .set("Accept", "application/json");
-    console.log(response.body);
     newUserId = response.body.id;
     expect(response.status).toBe(200);
   });
