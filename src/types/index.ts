@@ -18,10 +18,17 @@ export interface Product {
 }
 
 export type OrderStatus = "active" | "complete" | "canceled";
+export interface OrderItem {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+}
 export interface Order {
   id?: string;
   status: OrderStatus;
   user_id: string;
+  items?: OrderItem[];
 }
 export interface OrderProducts {
   id?: string;

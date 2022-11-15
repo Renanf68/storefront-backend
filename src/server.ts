@@ -5,13 +5,13 @@ import userRoutes from "./handlers/user";
 import categoryRoutes from "./handlers/category";
 import productRoutes from "./handlers/product";
 import orderRoutes from "./handlers/order";
-// import dashboardRoutes from "./handlers/dashboard";
+import dashboardRoutes from "./handlers/dashboard";
 
 const app: express.Application = express();
 const address: string = "0.0.0.0:3000";
 
 const corsOptions = {
-  origin: "http://otherdomain.com",
+  origin: "http://otheralloweddomain.com",
   optionSuccessStatus: 200,
 };
 
@@ -28,7 +28,7 @@ userRoutes(app);
 categoryRoutes(app);
 productRoutes(app);
 orderRoutes(app);
-// dashboardRoutes(app);
+dashboardRoutes(app);
 
 app.listen(3000, function () {
   console.log(`starting app on: ${address}`);
