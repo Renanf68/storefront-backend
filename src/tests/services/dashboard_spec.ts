@@ -9,7 +9,7 @@ const dashboard = new DashboardQueries();
 
 let setup: SetupDashboardTestResult;
 
-fdescribe("Dashboard Models", () => {
+describe("Dashboard Models", () => {
   beforeAll(async () => {
     setup = await setupDashboardTest();
   });
@@ -44,7 +44,7 @@ fdescribe("Dashboard Models", () => {
       setup.products[0],
     ]);
   });
-  it("userOrdersByStatus method should return correct order", async () => {
+  it("userOrdersByStatus method should return correct orders", async () => {
     const response = await dashboard.userOrdersByStatus(
       setup.userId,
       "complete"

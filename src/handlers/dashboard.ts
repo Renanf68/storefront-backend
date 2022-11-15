@@ -21,7 +21,7 @@ const topFivePopularProducts = async (_req: Request, res: Response) => {
 
 const userOrdersByStatus = async (req: Request, res: Response) => {
   const products = await dashboard.userOrdersByStatus(
-    req.body.user_id,
+    req.params.id,
     req.body.order_status
   );
   res.json(products);
@@ -31,7 +31,7 @@ const dashboardRoutes = (app: express.Application) => {
   app.get("/products_by_category_id/:id", productsByCategoryId);
   app.get("/top-five-popular-products", topFivePopularProducts);
   app.get("/products_in_order/:id", verifyAuthToken, productsInOrder);
-  app.get("/user_orders_by_status/:id", verifyAuthToken, userOrdersByStatus);
+  app.get("/users/:id/orders", verifyAuthToken, userOrdersByStatus);
 };
 
 export default dashboardRoutes;
