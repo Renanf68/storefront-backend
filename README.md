@@ -24,16 +24,20 @@ TOKEN_SECRET=
 ### 2. Create a docker container
 The next step is to run `yarn docker` to create the container and the main database POSTGRES_DB, as well as establish the connection with it.
 
-**NOTE1** It is required a docker interface, like Docker Desktop, installed and running.
+**NOTE** It is required a docker interface, like Docker Desktop, installed and running.
 
-### 3. Running the API
+### 3. Running migrations
+To run migrations and create all data tables needed, run `yarn migrate`.
+
+### 4. Running the API
 After previous settings, run the API:
 ```bash
 yarn watch
 ```
+**NOTE** The server should be running on port 3000 and the database on port 5432.
 
-### 4. Test
-#### 4.1 Creating a test database
+### 5. Test
+#### 5.1 Creating a test database
 With the container running, you need to access it with the POSTGRES_USER and create the POSTGRES_TEST_DB: 
 ```bash
 docker exec -it <container_name> bash
@@ -41,7 +45,7 @@ su postgres
 psql
 CREATE DATABASE <database_name>;
 ```
-#### 4.2 Running tests
+#### 5.2 Running tests
 To test the API run:
 ```bash
 yarn test
