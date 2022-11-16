@@ -7,7 +7,7 @@
     "docker": "docker-compose up",
     "migrate": "db-migrate up",
     "migrate-down": "db-migrate down",
-    "start": "node src/server.ts",
+    "start": "ts-node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "build": "tsc",
     "test": "rm -rf ./dist && db-migrate --env test reset && ENV=test yarn build && db-migrate --env test up && ENV=test jasmine",
