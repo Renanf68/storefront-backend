@@ -34,7 +34,7 @@ After previous settings, run the API:
 ```bash
 yarn watch
 ```
-**NOTE** The server should be running on port 3000 and the database on port 5432.
+**NOTE** The server should be running on port `3000` and the database on port `5432`.
 
 ### 5. Test
 #### 5.1 Creating a test database
