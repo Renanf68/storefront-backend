@@ -8,7 +8,7 @@ Below are described all the API routes for each database entity
 - CREATE route: '/users' [POST]
 - AUTH route: '/users/auth' [POST]
 - DELETE route: '/users/:id' [DELETE] [token required]
-- User orders by status route: '/users/:id/orders' [GET] [token required]
+- User orders by status route: '/users/:id/orders' [GET] [token and order_status are required]
 
 #### Categories
 - INDEX route: '/categories' [GET]
