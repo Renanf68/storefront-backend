@@ -6,12 +6,22 @@ import { verifyAuthToken } from "./verifyAuthToken";
 const store = new OrderStore();
 
 const index = async (_req: Request, res: Response) => {
-  const orders = await store.index();
-  res.json(orders);
+  try {
+    const orders = await store.index();
+    res.json(orders);
+  } catch (error) {
+    res.status(400);
+    res.json(error);
+  }
 };
 const show = async (req: Request, res: Response) => {
-  const order = await store.show(req.params.id);
-  res.json(order);
+  try {
+    const order = await store.show(req.params.id);
+    res.json(order);
+  } catch (error) {
+    res.status(400);
+    res.json(error);
+  }
 };
 const create = async (req: Request, res: Response) => {
   try {
@@ -21,9 +31,9 @@ const create = async (req: Request, res: Response) => {
     };
     const newOrder = await store.create(order);
     res.json(newOrder);
-  } catch (err) {
+  } catch (error) {
     res.status(400);
-    res.json(err);
+    res.json(error);
   }
 };
 const updateStatus = async (req: Request, res: Response) => {
@@ -32,9 +42,9 @@ const updateStatus = async (req: Request, res: Response) => {
     const status: OrderStatus = req.body.status;
     const newOrder = await store.updateStatus(orderId, status);
     res.json(newOrder);
-  } catch (err) {
+  } catch (error) {
     res.status(400);
-    res.json(err);
+    res.json(error);
   }
 };
 const addProduct = async (req: Request, res: Response) => {
@@ -44,15 +54,20 @@ const addProduct = async (req: Request, res: Response) => {
     const quantity: number = parseInt(req.body.quantity);
     const relationship = await store.addProduct(orderId, productId, quantity);
     res.json(relationship);
-  } catch (err) {
-    const message = (err as Error).message;
+  } catch (error) {
+    const message = (error as Error).message;
     res.status(400);
     res.json({ error: message });
   }
 };
 const destroy = async (req: Request, res: Response) => {
-  const deleted = await store.delete(req.params.id);
-  res.json(deleted);
+  try {
+    const deleted = await store.delete(req.params.id);
+    res.json(deleted);
+  } catch (error) {
+    res.status(400);
+    res.json(error);
+  }
 };
 
 const orderRoutes = (app: express.Application) => {
